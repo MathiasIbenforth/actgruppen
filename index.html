@@ -985,6 +985,86 @@ html { background: #faf3e7; }
 }
 
 
+
+/* ===== Værdi-swipe øvelse ===== */
+.vswipe { max-width: 440px; margin: 32px auto 8px; }
+.vswipe-intro { text-align: center; margin-bottom: 20px; }
+.vswipe-intro p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin: 0 0 6px; }
+.vswipe-stage { position: relative; height: 280px; margin: 0 auto 18px; }
+.vcard {
+  position: absolute; inset: 0; margin: auto;
+  width: 100%; height: 100%;
+  background: var(--paper);
+  border: 1.5px solid var(--rule);
+  border-radius: 20px;
+  box-shadow: 0 6px 22px rgba(60,45,30,0.10);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; box-sizing: border-box;
+  cursor: grab; user-select: none; touch-action: pan-y;
+  transition: transform 0.05s linear;
+}
+.vcard:active { cursor: grabbing; }
+.vcard .vlabel {
+  font-family: 'Lora', serif; font-style: italic;
+  font-size: 30px; color: var(--ink); text-align: center; line-height: 1.25;
+}
+.vcard .vcount { position: absolute; top: 14px; right: 18px; font-size: 13px; color: var(--ink-faded); }
+.vcard .vhint-no, .vcard .vhint-yes {
+  position: absolute; top: 16px; font-family: 'Lora', serif; font-style: italic;
+  font-size: 17px; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+  opacity: 0; transition: opacity 0.1s; border: 2px solid;
+}
+.vcard .vhint-no { left: 16px; color: var(--ink-faded); border-color: var(--ink-faded); transform: rotate(-8deg); }
+.vcard .vhint-yes { right: 16px; color: var(--ochre); border-color: var(--ochre); transform: rotate(8deg); }
+.vswipe-buttons { display: flex; gap: 16px; justify-content: center; margin-bottom: 8px; }
+.vbtn {
+  border: 1.5px solid var(--rule); background: var(--paper);
+  border-radius: 999px; padding: 12px 22px; cursor: pointer;
+  font-family: 'Inter Tight', sans-serif; font-size: 15px; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color 0.2s, transform 0.15s, background 0.2s;
+}
+.vbtn:hover { transform: translateY(-1px); }
+.vbtn-no:hover { border-color: var(--ink-faded); }
+.vbtn-yes:hover { border-color: var(--ochre); background: #fbf4e6; }
+.vbtn .vbtn-icon { font-size: 19px; }
+.vbtn-no .vbtn-icon { color: var(--ink-faded); }
+.vbtn-yes .vbtn-icon { color: var(--ochre); }
+.vswipe-progress { text-align: center; font-size: 13px; color: var(--ink-faded); margin-bottom: 4px; }
+
+/* Vælg 5-fase */
+.vpick { max-width: 460px; margin: 24px auto 8px; }
+.vpick h3 { font-family: 'Lora', serif; font-style: italic; font-size: 22px; color: var(--ink); text-align: center; margin: 0 0 6px; }
+.vpick-sub { text-align: center; font-size: 14px; color: var(--ink-faded); margin-bottom: 18px; }
+.vpick-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.vpick-chip {
+  border: 1.5px solid var(--rule); background: var(--paper);
+  border-radius: 999px; padding: 10px 18px; cursor: pointer;
+  font-family: 'Lora', serif; font-style: italic; font-size: 17px; color: var(--ink-soft);
+  transition: all 0.15s;
+}
+.vpick-chip:hover { border-color: var(--ochre); }
+.vpick-chip.chosen { background: var(--ochre); color: #fff; border-color: var(--ochre); }
+.vpick-counter { text-align: center; font-size: 14px; color: var(--ink-faded); margin: 16px 0 8px; }
+
+/* Resultat */
+.vresult { max-width: 440px; margin: 24px auto 8px; text-align: center; }
+.vresult h3 { font-family: 'Lora', serif; font-style: italic; font-size: 24px; color: var(--ink); margin: 0 0 16px; }
+.vresult-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+.vresult-item {
+  background: var(--paper); border: 1.5px solid var(--ochre); border-left: 6px solid var(--ochre);
+  border-radius: 12px; padding: 14px 20px;
+  font-family: 'Lora', serif; font-style: italic; font-size: 21px; color: var(--ink);
+}
+.vresult p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin: 0 0 18px; }
+.vrestart {
+  border: 1.5px solid var(--rule); background: transparent; border-radius: 999px;
+  padding: 10px 22px; cursor: pointer; font-family: 'Inter Tight', sans-serif;
+  font-size: 14px; color: var(--ink-faded); transition: all 0.2s;
+}
+.vrestart:hover { border-color: var(--ochre); color: var(--ink-soft); }
+.vhidden { display: none !important; }
+
 </style>
 </head>
 <body>
@@ -1004,7 +1084,7 @@ html { background: #faf3e7; }
 </div>
 
 <div class="front-intro">
-  <p><strong style="font-family:'Lora',serif; font-style:italic; font-weight:600; color:#b85a2e;">Velkommen.</strong> Denne side hører til et gruppeforløb for indlagte patienter på psykiatrisk sengeafsnit i Slagelse. Du er velkommen til at kigge rundt — og vi håber, du har lyst til at møde op.</p>
+  <p><strong style="font-family:'Lora',serif; font-style:italic; font-weight:600; color:#b85a2e;">Velkommen.</strong> Denne side hører til et gruppeforløb baseret på ACT. Du er velkommen til at kigge rundt — og vi håber, du har lyst til at møde op.</p>
   <p>Her finder du information om gruppen, de seks temaer vi arbejder med, og øvelser du kan bruge på egen hånd.</p>
 </div>
 
@@ -1197,7 +1277,7 @@ html { background: #faf3e7; }
 </div><!-- end accordion-sections -->
 
 <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -1215,7 +1295,7 @@ html { background: #faf3e7; }
     <p class="eyebrow">om gruppeterapien</p>
   <h1>Et fælles rum<br><em>et øjeblik om ugen.</em></h1>
   <p class="lead">
-    Gruppen er et tilbud til dig, der er indlagt. Du behøver ikke have erfaring med terapi.
+    Gruppen er et tilbud til dig. Du behøver ikke have erfaring med terapi.
     Du behøver ikke at sige noget. Du må gerne komme, som du er.
   </p>
 
@@ -1233,16 +1313,16 @@ html { background: #faf3e7; }
 
   <h2>Hvem er gruppen for?</h2>
   <p>
-    Gruppen er for patienter, der er indlagt på sengeafsnit. Du behøver ikke at have været med
+    Gruppen er åben for alle, der har lyst til at være med. Du behøver ikke at have været med
     før. Du kan sagtens komme forbi en enkelt gang og se, om det er noget for dig.
   </p>
   <p>
-    Er du i tvivl, så spørg en fra personalet.
+    Er du i tvivl, så spørg endelig.
   </p>
 
   <h2>Hvem leder gruppen?</h2>
   <p>
-    Gruppen ledes af en psykolog. Der er altid også en kontaktperson med fra et af afsnittene.
+    Gruppen ledes af en psykolog. Der er altid også en medfacilitator med.
   </p>
 
   <h2>Hvad arbejder vi med?</h2>
@@ -1258,7 +1338,7 @@ html { background: #faf3e7; }
   </p>
   <p>
     Vi taler ikke om diagnoser eller medicin i gruppen. Vi holder os til dagens tema. Temaerne
-    er valgt, så de rummer noget for alle, uanset hvorfor man er indlagt.
+    er valgt, så de rummer noget for alle.
   </p>
 
   <div class="callout">
@@ -1288,9 +1368,9 @@ html { background: #faf3e7; }
   <div class="practical">
     <h3>Praktisk</h3>
     <p><strong>Hvornår:</strong> 2–3 gange om ugen i løbet af juli og august måned.</p>
-    <p><strong>Hvor:</strong> Aftales med afsnittet.</p>
+    <p><strong>Hvor:</strong> Aftales nærmere.</p>
     <p><strong>Varighed:</strong> 55 minutter.</p>
-    <p><strong>Tilmelding:</strong> Tal med personalet.</p>
+    <p><strong>Tilmelding:</strong> Aftales nærmere.</p>
 
     <h2 style="margin-top: 80px;">Denne hjemmeside</h2>
     <p>
@@ -1304,7 +1384,7 @@ html { background: #faf3e7; }
       man arbejder med dem i praksis. At læse om dem er et godt udgangspunkt — men det er i gruppen,
       at det rigtige arbejde sker. Derfor opfordrer vi til at møde op, også selvom det kan føles
       svært at komme afsted. Hvis du har brug for hjælp til at møde op, så sig det til en
-      kontaktperson eller dit behandlerteam — det er helt i orden at bede om det.
+      du stoler på — det er helt i orden at bede om det.
     </p>
     <p>
       Hjemmesiden findes på <strong>ACTgruppen.dk</strong> og forventes at være tilgængelig indtil sommeren 2027.
@@ -1313,7 +1393,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -1466,7 +1546,7 @@ html { background: #faf3e7; }
     At skabe overblik sker ikke med det samme. Det kræver øvelse og skal vedligeholdes. De første
     gange man øver sig, føles det måske mærkeligt eller meningsløst. Det er normalt. Prøv alligevel
     at lave en lille øvelse om dagen i nogle dage og se, om noget ændrer sig ift. hvor meget dine
-    tanker påvirker dig. Du er velkommen til at tale med en kontaktperson eller behandler om det.
+    tanker påvirker dig. Du er velkommen til at tale med en, du stoler på, om det.
   </p>
   
 <div class="closing-illustration">
@@ -1526,7 +1606,7 @@ html { background: #faf3e7; }
 
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
 <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
   </div>
 </div><div class="screen gone" id="screen-tema-accept">
@@ -1668,7 +1748,7 @@ html { background: #faf3e7; }
 
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
 <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
   </div>
 </div><div class="screen gone" id="screen-tema-observerende-selv">
@@ -1801,10 +1881,13 @@ html { background: #faf3e7; }
 
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
 <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
   </div>
-</div><div class="screen gone" id="screen-tema-vaerdier">
+</div><div class="screen gone"
+
+
+     id="screen-tema-vaerdier">
   <div class="screen-inner">
     
 <div class="topbar">
@@ -1947,6 +2030,199 @@ html { background: #faf3e7; }
     </p>
   </div>
 
+  <h2>Undersøg hvilke værdier, der føles rigtige — lige nu</h2>
+
+<div class="vswipe" id="vswipe">
+  <div class="vswipe-intro" id="vswipe-intro">
+    <p><strong>Prøv selv:</strong> Swipe dig gennem 25 livsværdier.</p>
+    <p>Swipe til <em>højre</em> for dem, du forbinder dig med — til <em>venstre</em> for dem, der ikke er dig. Der er ingen rigtige svar.</p>
+  </div>
+
+  <!-- FASE 1: swipe -->
+  <div id="vphase-swipe">
+    <div class="vswipe-stage" id="vstage"></div>
+    <div class="vswipe-progress" id="vprogress"></div>
+    <div class="vswipe-buttons">
+      <button class="vbtn vbtn-no" onclick="vSwipe(-1)"><span class="vbtn-icon">✕</span> ikke mig</button>
+      <button class="vbtn vbtn-yes" onclick="vSwipe(1)"><span class="vbtn-icon">♡</span> det er mig</button>
+    </div>
+  </div>
+
+  <!-- FASE 2: vælg 5 -->
+  <div class="vpick vhidden" id="vphase-pick">
+    <h3>Vælg de 5 vigtigste</h3>
+    <p class="vpick-sub">Af dem, du forbandt dig med, så vælg de fem, der betyder mest for dig <em>lige nu</em>.</p>
+    <div class="vpick-grid" id="vpick-grid"></div>
+    <div class="vpick-counter" id="vpick-counter">0 af 5 valgt</div>
+    <div style="text-align:center;">
+      <button class="vbtn vbtn-yes vhidden" id="vpick-done" onclick="vShowResult()">se mine 5 →</button>
+    </div>
+  </div>
+
+  <!-- FASE 3: resultat -->
+  <div class="vresult vhidden" id="vphase-result">
+    <h3>Dine fem livsværdier — lige nu</h3>
+    <div class="vresult-list" id="vresult-list"></div>
+    <p>Det er et lille øjebliksbillede af, hvad der peger retning for dig. Det kan ændre sig fra dag til dag — og det er helt i orden. Læg mærke til: er der et lille skridt, du kunne tage i retning af en af dem i dag?</p>
+    <button class="vrestart" onclick="vReset()">↺ prøv igen</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const VALUES = ["Kærlighed", "Venskab", "At høre til", "Trofasthed", "At blive forstået", "At lære nyt", "Personlig udvikling", "Visdom", "At turde", "Selvindsigt", "At skabe noget", "Leg", "Skønhed i hverdagen", "Eventyrlyst", "Spontanitet", "Indre fred", "Taknemmelighed", "At være til stede", "Enkelhed", "Håb", "At gøre en forskel", "Medfølelse", "Retfærdighed", "At passe på naturen", "Generøsitet", "At have magt", "At være rig", "At være berømt", "At vinde over andre", "At have kontrol", "Tillid", "At være der for andre", "Ærlighed", "Åbenhed", "Forsoning", "At blive holdt af", "Romantik", "Familiebånd", "At lytte", "Nysgerrighed", "At udfordre mig selv", "Dygtighed", "Beslutsomhed", "Vedholdenhed", "At forstå mig selv", "Refleksion", "Musik", "At udtrykke mig", "Fantasi", "Håndværk", "Humor", "Frihed", "At bestemme selv", "Uafhængighed", "At rejse", "Forandring", "Tryghed", "Stilhed", "Hvile", "Balance", "Tålmodighed", "At slippe kontrol", "At hjælpe", "Fællesskab", "At høre til noget større", "Mod", "Integritet", "At leve sundt", "Åndelighed", "Status", "Anerkendelse", "At være den bedste", "Indflydelse", "Succes", "At blive beundret"];
+  const DECK_SIZE = 25; // antal kort der vises per gang
+  let deck = [];        // resterende kort (shuffles ved start)
+  let liked = [];       // højre-swipede
+  let chosen = [];      // de 5 valgte
+  let idx = 0;
+  let dragStartX = 0, dragging = false, curDX = 0, curCard = null;
+
+  function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+
+  function vInit(){
+    deck = shuffle(VALUES).slice(0, DECK_SIZE);
+    liked = []; chosen = []; idx = 0;
+    document.getElementById('vphase-swipe').classList.remove('vhidden');
+    document.getElementById('vphase-pick').classList.add('vhidden');
+    document.getElementById('vphase-result').classList.add('vhidden');
+    document.getElementById('vswipe-intro').classList.remove('vhidden');
+    renderCard();
+  }
+
+  function renderCard(){
+    const stage = document.getElementById('vstage');
+    stage.innerHTML = '';
+    const prog = document.getElementById('vprogress');
+    if(idx >= deck.length){ startPick(); return; }
+    // vis op til 2 kort i stak (bagerst + forrest) for dybde
+    for(let k = Math.min(idx+1, deck.length-1); k >= idx; k--){
+      const v = deck[k];
+      const card = document.createElement('div');
+      card.className = 'vcard';
+      const depth = k - idx;
+      card.style.transform = `scale(${1 - depth*0.04}) translateY(${depth*10}px)`;
+      card.style.zIndex = 10 - depth;
+      card.innerHTML = `<span class="vcount">${idx+1} / ${deck.length}</span>
+        <span class="vhint-no">ikke mig</span>
+        <span class="vhint-yes">det er mig</span>
+        <span class="vlabel">${v}</span>`;
+      if(depth === 0){ curCard = card; attachDrag(card); }
+      stage.appendChild(card);
+    }
+    prog.textContent = `${liked.length} forbundet · ${deck.length - idx} tilbage`;
+  }
+
+  function attachDrag(card){
+    const down = (e)=>{ dragging=true; dragStartX = (e.touches?e.touches[0].clientX:e.clientX); curDX=0; card.style.transition='none'; };
+    const move = (e)=>{
+      if(!dragging) return;
+      const x = (e.touches?e.touches[0].clientX:e.clientX);
+      curDX = x - dragStartX;
+      const rot = curDX * 0.06;
+      card.style.transform = `translateX(${curDX}px) rotate(${rot}deg)`;
+      card.querySelector('.vhint-yes').style.opacity = curDX > 30 ? Math.min(1, curDX/120) : 0;
+      card.querySelector('.vhint-no').style.opacity = curDX < -30 ? Math.min(1, -curDX/120) : 0;
+    };
+    const up = ()=>{
+      if(!dragging) return; dragging=false;
+      card.style.transition='transform 0.25s ease';
+      if(Math.abs(curDX) > 90){ flyOut(card, curDX>0?1:-1); }
+      else { card.style.transform=''; card.querySelector('.vhint-yes').style.opacity=0; card.querySelector('.vhint-no').style.opacity=0; }
+    };
+    card.addEventListener('mousedown', down); card.addEventListener('touchstart', down, {passive:true});
+    window.addEventListener('mousemove', move); window.addEventListener('touchmove', move, {passive:true});
+    window.addEventListener('mouseup', up); window.addEventListener('touchend', up);
+  }
+
+  function flyOut(card, dir){
+    card.style.transform = `translateX(${dir*600}px) rotate(${dir*30}deg)`;
+    card.style.opacity = '0';
+    if(dir>0) liked.push(deck[idx]);
+    idx++;
+    setTimeout(renderCard, 220);
+  }
+
+  window.vSwipe = function(dir){
+    if(idx >= deck.length || !curCard) return;
+    curCard.style.transition='transform 0.25s ease, opacity 0.25s ease';
+    flyOut(curCard, dir);
+  };
+
+  function startPick(){
+    document.getElementById('vphase-swipe').classList.add('vhidden');
+    document.getElementById('vswipe-intro').classList.add('vhidden');
+    const pick = document.getElementById('vphase-pick');
+    const result = document.getElementById('vphase-result');
+    // Hvis man forbandt sig med færre end 5, så spring direkte til resultat med dem man har
+    if(liked.length <= 5){
+      chosen = liked.slice();
+      vShowResult(); return;
+    }
+    pick.classList.remove('vhidden');
+    result.classList.add('vhidden');
+    const grid = document.getElementById('vpick-grid');
+    grid.innerHTML = '';
+    chosen = [];
+    liked.forEach(v=>{
+      const chip = document.createElement('button');
+      chip.className = 'vpick-chip';
+      chip.textContent = v;
+      chip.onclick = ()=> toggleChip(chip, v);
+      grid.appendChild(chip);
+    });
+    updatePickCounter();
+  }
+
+  function toggleChip(chip, v){
+    const i = chosen.indexOf(v);
+    if(i>=0){ chosen.splice(i,1); chip.classList.remove('chosen'); }
+    else { if(chosen.length>=5) return; chosen.push(v); chip.classList.add('chosen'); }
+    updatePickCounter();
+  }
+
+  function updatePickCounter(){
+    document.getElementById('vpick-counter').textContent = `${chosen.length} af 5 valgt`;
+    document.getElementById('vpick-done').classList.toggle('vhidden', chosen.length !== 5);
+  }
+
+  window.vShowResult = function(){
+    document.getElementById('vphase-pick').classList.add('vhidden');
+    document.getElementById('vphase-swipe').classList.add('vhidden');
+    document.getElementById('vswipe-intro').classList.add('vhidden');
+    const result = document.getElementById('vphase-result');
+    result.classList.remove('vhidden');
+    const list = document.getElementById('vresult-list');
+    const heading = result.querySelector('h3');
+    const para = result.querySelector('p');
+    list.innerHTML = '';
+    const finalList = (chosen.length?chosen:liked);
+    if(finalList.length === 0){
+      // Ingen værdier valgt - vis en blid besked i stedet for tom liste
+      heading.textContent = 'Ingen føltes rigtige i dag';
+      para.textContent = 'Det er helt i orden. Nogle dage kan alt føles fjernt, n\u00e5r man har det sv\u00e6rt. Det betyder ikke, at du ikke har v\u00e6rdier \u2014 kun at de er sv\u00e6re at m\u00e6rke lige nu. Pr\u00f8v igen en anden dag.';
+    } else {
+      heading.textContent = 'Dine v\u00e6rdier \u2014 lige nu';
+      para.textContent = 'Det er et lille \u00f8jebliksbillede af, hvad der peger retning for dig. Det kan \u00e6ndre sig fra dag til dag \u2014 og det er helt i orden. L\u00e6g m\u00e6rke til: er der et lille skridt, du kunne tage i retning af en af dem i dag?';
+      finalList.forEach(v=>{
+        const item = document.createElement('div');
+        item.className = 'vresult-item';
+        item.textContent = v;
+        list.appendChild(item);
+      });
+    }
+  };
+
+  window.vReset = function(){ vInit(); };
+
+  // Init når siden vises. Vi kører ved load + eksponerer en re-init hook.
+  window.vInitSwipe = vInit;
+  document.addEventListener('DOMContentLoaded', vInit);
+  // fallback hvis DOMContentLoaded allerede er sket
+  if(document.readyState !== 'loading'){ setTimeout(vInit, 0); }
+})();
+</script>
+
   <h2>Hvad så?</h2>
   <p>
     Livsværdier er ikke noget, man finder én gang og er færdig med. De forandrer sig over tid.
@@ -1995,9 +2271,12 @@ html { background: #faf3e7; }
 </svg>
 </div>
     
-<div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
+
+
+
+    <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2087,7 +2366,7 @@ html { background: #faf3e7; }
   <div class="callout">
     <p>
       "Bevidst handling" kan lyde som noget, der kræver meget. Det gør det ikke. På en dag,
-      hvor du har det rigtig skidt, kan det være bevidst handling at sige til personalet, at
+      hvor du har det rigtig skidt, kan det være bevidst handling at sige højt, at
       det er svært. Eller at deltage i én gruppe. Eller at tage et bad. Det handler ikke om
       størrelsen — men om at du gør det med din bevidsthed med.
     </p>
@@ -2198,7 +2477,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2424,7 +2703,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2475,7 +2754,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2537,7 +2816,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2655,7 +2934,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2754,7 +3033,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2793,7 +3072,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2830,7 +3109,7 @@ html { background: #faf3e7; }
     
 <div class="page-back-bottom"><a class="page-back" onclick="goPage('forside')">← tilbage</a></div>
     <div class="screen-footer">
-  <p>ACTgruppen.dk  ·  Udviklet af klinisk psykolog, Mathias Ibenforth<br>Materialet er en støtte — ikke en erstatning for kontakt med dit behandlerteam.</p>
+  <p>ACTgruppen.dk<br>Materialet er en støtte — ikke en erstatning for personlig kontakt og hjælp.</p>
 </div>
 
   </div>
@@ -2854,6 +3133,10 @@ function goPage(name) {
       svg.pauseAnimations();
       svg.unpauseAnimations();
     });
+    // Nulstil værdi-swipe-øvelsen, så den starter forfra ved hvert besøg
+    if (name === 'tema-vaerdier' && typeof window.vInitSwipe === 'function') {
+      window.vInitSwipe();
+    }
   }
   try {
     if (name === 'forside') {
